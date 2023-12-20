@@ -6,7 +6,7 @@
 #     return False
 
 def valid_duration(to_validate: int):
-    if to_validate <= 2:
+    if to_validate <= 5:
          return True
     return False
 

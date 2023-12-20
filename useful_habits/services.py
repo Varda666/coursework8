@@ -6,18 +6,18 @@ from django_celery_beat.models import PeriodicTask, \
 
 # Создаем интервал для повтора
 schedule, created = IntervalSchedule.objects.get_or_create(
-     every=7,
+     every=1,
      period=IntervalSchedule.DAYS,
  )
 
 # Создаем задачу для повторения
 PeriodicTask.objects.create(
      interval=schedule,
-     name='Отправка писем об обновлении курсов',
-     task='useful_habits.tasks._send_mail_email',
+     name='Напоминание о выполнении привычки',
+     task='useful_habits.tasks.send_message_telegram',
      args=json.dumps(['arg1', 'arg2']),
      kwargs=json.dumps({
         'be_careful': True,
      }),
-     expires=datetime.utcnow() + timedelta(seconds=30)
+     expires=datetime.utcnow() + timedelta(minutes=3)
  )

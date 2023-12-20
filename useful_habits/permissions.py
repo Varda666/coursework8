@@ -20,10 +20,10 @@ class IsOwnerOrPublic(BasePermission):
             return False
 
 
-# class IsOwnerOrNot(BasePermission):
-#     def has_object_permission(self, request, view, obj):
-#         if request.user == obj.user:
-#             return True
-#         else:
-#             return obj.email, obj.first_name, obj.country, obj.img
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.user == obj.user:
+            return True
+        else:
+            return False
 
