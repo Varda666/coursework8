@@ -3,10 +3,10 @@ from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIVie
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from useful_habits.tasks import check_last_visit
-from users.models import User, UserHabits
-from useful_habits.permissions import IsOwnerOrNot, IsOwner
-from users.serializers import UserSerializer, UserHabitsSerializer
+
+from users.models import User
+from useful_habits.permissions import IsOwner
+from users.serializers import UserSerializer
 # from rest_framework_simplejwt.views import TokenObtainPairView
 
 from django.contrib.auth.views import LoginView as BaseLoginView
@@ -27,14 +27,14 @@ class UserCreateView(CreateAPIView):
     #         return super().form_valid(form)
 
 
-class UserHabitsCreateView(CreateAPIView):
-    queryset = UserHabits.objects.all()
-    serializer_class = UserHabitsSerializer
+# class UserHabitsCreateView(CreateAPIView):
+#     queryset = UserHabits.objects.all()
+#     serializer_class = UserHabitsSerializer
 
 
 class UserUpdateView(UpdateAPIView):
-    queryset = User.objects.all(), UserHabits.objects.all()
-    serializer_class = UserSerializer, UserHabitsSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsOwner]
 
     # def perform_update(self, serializer):
@@ -43,9 +43,9 @@ class UserUpdateView(UpdateAPIView):
     #     self.request.user.is_active = False
 
 class UserRetrieveView(RetrieveAPIView):
-    queryset = User.objects.all(), UserHabits.objects.all()
-    serializer_class = UserSerializer, UserHabitsSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # permission_classes = [IsAuthenticated, IsOwner]
 
 class UserDestroyView(DestroyAPIView):
     queryset = User.objects.all()
@@ -53,16 +53,16 @@ class UserDestroyView(DestroyAPIView):
     permission_classes = [IsAdminUser | IsOwner]
 
 
-class UserHabitsDestroyView(DestroyAPIView):
-    queryset = UserHabits.objects.all()
-    serializer_class = UserHabitsSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser | IsOwner]
-
-
-class UserHabitsListView(ListAPIView):
-    queryset = UserHabits.objects.all()
-    serializer_class = UserHabitsSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+# class UserHabitsDestroyView(DestroyAPIView):
+#     queryset = UserHabits.objects.all()
+#     serializer_class = UserHabitsSerializer
+#     permission_classes = [IsAuthenticated, IsAdminUser | IsOwner]
+#
+#
+# class UserHabitsListView(ListAPIView):
+#     queryset = UserHabits.objects.all()
+#     serializer_class = UserHabitsSerializer
+#     permission_classes = [IsAuthenticated, IsOwner]
 
 
 # class MyTokenObtainPairView(TokenObtainPairView):

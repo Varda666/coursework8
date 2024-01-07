@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from users.models import User, UserHabits
+from users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,11 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(email=validated_data['email'], password=validated_data['password'], name=validated_data['name'])
         return user
 
-class UserHabitsSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = UserHabits
-        fields = "__all__"
+# class UserHabitsSerializer(serializers.ModelSerializer):
+#
+#     class Meta:
+#         model = UserHabits
+#         fields = "__all__"
 
 
 # class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

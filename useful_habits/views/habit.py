@@ -36,16 +36,16 @@ class HabitListView(ListAPIView):
     serializer_class = HabitSerializer
     permission_classes = [IsModerator | IsOwner | IsOwnerOrPublic]
 
-    def get_queryset(self):
-        queryset = self.queryset
-        for query in queryset:
-            action = query['action']
-            place = query['place']
-            time = query['time']
-            text = 'Не забудьте' + "\n" + str(action) + "\n" + str(place) + "\n" + time
-            send_message_telegram(text=text)
-        if isinstance(queryset, QuerySet):
-            # Ensure queryset is re-evaluated on each request.
-            queryset = queryset.all()
-        return queryset
+    # def get_queryset(self):
+    #     queryset = self.queryset
+    #     if isinstance(queryset, QuerySet):
+    #         # Ensure queryset is re-evaluated on each request.
+    #         queryset = queryset.all()
+    #         # for query in queryset:
+    #         #     action = query['action']
+    #         #     place = query['place']
+    #         #     time = query['time']
+    #         #     text = 'Не забудьте' + "\n" + str(action) + "\n" + str(place) + "\n" + time
+    #         #     send_message_telegram(text=text)
+    #     return queryset
 

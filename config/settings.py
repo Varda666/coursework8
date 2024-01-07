@@ -2,7 +2,11 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+
+
 from dotenv import load_dotenv
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,12 +36,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'django_celery_beat',
-    'bot',
+    # 'bot',
     ]
 
 REST_FRAMEWORK = {
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 5,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
@@ -123,9 +127,11 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = (
-    BASE_DIR / 'static',
-)
+# STATICFILES_DIRS = (
+#     BASE_DIR / 'static',
+# )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # MEDIA_URL = 'media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -137,6 +143,7 @@ LOGIN_URL = 'users/'
 LOGOUT_URL = 'users/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+    # reverse_lazy(users.urls.UserRetrieveView.as_view()))
 
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')

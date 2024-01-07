@@ -10,11 +10,11 @@ from useful_habits.views.habit import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HabitListView.as_view(), name='lesson_list'),
-    path('<int:pk>/', HabitRetrieveView.as_view(), name='lesson_detail'),
-    path('update/<int:pk>/', HabitUpdateView.as_view(), name='lesson_update'),
-    path('create/', HabitCreateView.as_view(), name='lesson_create'),
-    path('delete/<int:pk>/', HabitDestroyView.as_view(), name='lesson_delete'),
+    path('', HabitListView.as_view(), name='habit_list'),
+    path('<int:pk>/', HabitRetrieveView.as_view(), name='habit_detail'),
+    path('update/<int:pk>/', HabitUpdateView.as_view(), name='habit_update'),
+    path('create/', HabitCreateView.as_view(), name='habit_create'),
+    path('delete/<int:pk>/', HabitDestroyView.as_view(), name='habit_delete'),
    ]
 
 # router = routers.SimpleRouter()

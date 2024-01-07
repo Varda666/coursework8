@@ -4,7 +4,9 @@ from rest_framework.permissions import BasePermission
 class IsModerator(BasePermission):
 
     def has_permission(self, request, view):
-        if request.user.user_role == 'moderator':
+        if request.user.is_superuser:
+            return True
+        elif request.user.user_role == 'moderator':
             return True
         return False
 

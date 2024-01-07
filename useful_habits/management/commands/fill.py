@@ -1,6 +1,6 @@
 from django.core.management import BaseCommand
 
-from useful_habits.models import Payment, Lesson, Course
+from useful_habits.models import Habit
 from users.models import User
 
 
@@ -10,26 +10,58 @@ class Command(BaseCommand):
         pass
 
 
-        # user3, _ = User.objects.get_or_create(email='admin1@mail.ru', defaults={
-        #     'first_name': 'Ivan',
-        #     'last_name': 'Ivanov',
-        #     'phone': '+79118245324',
-        #     'country': 'RF',
-        #     'is_superuser': True,
-        #     'is_staff': True
-        #      })
+        user1, _ = User.objects.get_or_create(email='admin1@mail.ru', defaults={
+            'name': 'Admin',
+            'last_name': 'Ivanov',
+            'is_superuser': True,
+            'is_staff': True,
+            'is_active': True
+             })
 
-        # course_list = [
-        #     {'name': 'Анг. язык для начинающих', 'description': 'Получение уровня А',
-        #      'lessons_count': 2, 'user': user3},
-        #     {'name': 'Нем. язык для начинающих', 'description': 'Получение уровня А',
-        #      'lessons_count': 2, 'user': user3},
-        # ]
-        # course_for_create = []
-        # for item in course_list:
-        #     course_for_create.append(Course(**item))
-        # Course.objects.all().delete()
-        # Course.objects.bulk_create(course_for_create)
+        habit_list1 = [
+            {'owner': user1,
+             'place': 'Любое',
+             'time': 'Любое',
+             'action': 'Читать 5 страниц',
+             'usefulness': True,
+             'pleasantness': False,
+             # 'connectivity': False,
+             'frequency': 'once a day',
+             'duration': 5,
+             'is_public': True,
+             'award': 'Печенька',
+            },
+            {'owner': user1,
+             'place': 'Кухня, столовая',
+             'time': 'Во время приема пищи',
+             'action': 'Есть больше овощей',
+             'usefulness': True,
+             'pleasantness': True,
+             # 'connectivity': False,
+             'frequency': 'twice a day',
+             'duration': 15,
+             'is_public': False,
+             },
+            {'owner': user1,
+             'place': 'Кухня, столовая',
+             'time': 'Вечером',
+             'action': 'Есть больше фруктов',
+             'usefulness': True,
+             'pleasantness': True,
+             # 'connectivity': 2,
+             'frequency': 'once a day',
+             'duration': 10,
+             'is_public': False,
+             },
+
+
+        ]
+
+        habit_for_create = []
+        for item in habit_list1:
+            habit_for_create.append(Habit(**item))
+        Habit.objects.all().delete()
+        Habit.objects.bulk_create(habit_for_create)
 
 
 

@@ -20,11 +20,11 @@ class Habit(models.Model):
     action = models.TextField(max_length=700, verbose_name='действие')
     usefulness = models.BooleanField(default=False, verbose_name='полезность')
     pleasantness = models.BooleanField(default=False, verbose_name='приятность')
-    connectivity = models.ManyToManyField('self', default=False, verbose_name='связанные привычки')
+    connectivity = models.ManyToManyField('self', symmetrical=False, default=False, verbose_name='связанные привычки')
     frequency = models.CharField(choices=FREQUENCY_CHOISES, max_length=150, verbose_name='переодичность')
     duration = models.IntegerField(verbose_name='время на выполнение в минутах')
     is_public = models.BooleanField(default=False, verbose_name='публичность')
-    award = models.CharField(max_length=150, verbose_name='вознаграждение')
+    award = models.CharField(default='', blank=True, max_length=150, verbose_name='вознаграждение')
 
 
     class Meta:

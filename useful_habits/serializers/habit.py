@@ -6,24 +6,23 @@ from useful_habits.validators import valid_duration
 
 class HabitSerializer(serializers.ModelSerializer):
     duration = serializers.IntegerField(validators=[valid_duration])
-    
 
-    def validate_con(self, data):
-        if data['connectivity'] is not None:
-            raise serializers.ValidationError("Нельзя одновременно выбрать связанные привычки и указать вознаграждение")
-        else:
-            return data
-
-    def validate_ple(self, data):
-        if data['pleasantness'] is True:
-            return data
-        else:
+    def validate_connectivity(self, data):
+        if data['pleasantness'] is True and data['connectivity']:
             raise serializers.ValidationError("В связанные привычки могут попадать только привычки с признаком приятной привычки")
+        else:
+            return data
 
-    def validate_awa(self, data):
-        if data['pleasantness'] is True:
+    def validate_pleasantness(self, data):
+        if data['pleasantness'] is True and data['connectivity'] and data['award']:
+            raise serializers.ValidationError("У приятной привычки не может быть вознаграждения или связанной привычки.")
+        else:
+            return data
+
+    def validate_award(self, data):
+        if data['connectivity'] and data['award']:
             raise serializers.ValidationError(
-                "У приятной привычки не может быть вознаграждения или связанной привычки.")
+                "Нельзя одновременно выбрать связанные привычки и указать вознаграждение.")
         else:
             return data
 
