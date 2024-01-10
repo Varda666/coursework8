@@ -17,24 +17,30 @@ class HabitCreateView(CreateAPIView):
 class HabitUpdateView(UpdateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsModerator | IsOwner]
+    permission_classes = [IsAuthenticated, IsModerator | IsOwner]
 
 
 class HabitRetrieveView(RetrieveAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsModerator | IsOwner | IsOwnerOrPublic]
+    permission_classes = [IsAuthenticated, IsModerator | IsOwner | IsOwnerOrPublic]
 
 class HabitDestroyView(DestroyAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsOwner | IsModerator]
+    permission_classes = [IsAuthenticated, IsOwner | IsModerator]
 
 
 class HabitListView(ListAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
-    permission_classes = [IsModerator | IsOwner | IsOwnerOrPublic]
+    permission_classes = [IsAuthenticated, IsModerator | IsOwner]
+
+
+class PublicHabitListView(ListAPIView):
+    queryset = Habit.objects.all()
+    serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated, IsOwnerOrPublic]
 
     # def get_queryset(self):
     #     queryset = self.queryset

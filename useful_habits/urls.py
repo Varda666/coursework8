@@ -11,6 +11,7 @@ from useful_habits.views.habit import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HabitListView.as_view(), name='habit_list'),
+    path('public/', PublicHabitListView.as_view(), name='public_habit_list'),
     path('<int:pk>/', HabitRetrieveView.as_view(), name='habit_detail'),
     path('update/<int:pk>/', HabitUpdateView.as_view(), name='habit_update'),
     path('create/', HabitCreateView.as_view(), name='habit_create'),
