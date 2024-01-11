@@ -6,8 +6,6 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -36,14 +34,16 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'django_celery_beat',
-    # 'bot',
-    ]
+    'bot',
+]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
 }
 
@@ -59,6 +59,7 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'user_id',
 }
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -68,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    # 'useful_habits.middleware.set_last_visit.SetLastVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -105,16 +105,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -143,7 +147,6 @@ LOGIN_URL = 'users/'
 LOGOUT_URL = 'users/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
-    # reverse_lazy(users.urls.UserRetrieveView.as_view()))
 
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
@@ -193,9 +196,9 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
      'task-name': {
          'task': 'useful_habits.tasks.check_last_visit',  # Путь к задаче
-         'schedule': timedelta(days=30),  # Расписание выполнения задачи (например, каждые 10 минут)
+         'schedule': timedelta(days=30),
      },
- }
+}
 
 TELEGRAM_BOT_API_KEY = os.getenv('TELEGRAM_BOT_API_KEY')
 MY_CHAT_ID = os.getenv('MY_CHAT_ID')

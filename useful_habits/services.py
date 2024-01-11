@@ -8,7 +8,7 @@ from django_celery_beat.models import PeriodicTask, \
 schedule, created = IntervalSchedule.objects.get_or_create(
      every=1,
      period=IntervalSchedule.DAYS,
- )
+)
 
 # Создаем задачу для повторения
 PeriodicTask.objects.create(
@@ -16,8 +16,10 @@ PeriodicTask.objects.create(
      name='Напоминание о выполнении привычки',
      task='useful_habits.tasks.send_message_telegram',
      args=json.dumps(['arg1', 'arg2']),
-     kwargs=json.dumps({
-        'be_careful': True,
-     }),
+     kwargs=json.dumps(
+          {
+               'be_careful': True,
+          }
+     ),
      expires=datetime.utcnow() + timedelta(minutes=3)
- )
+)

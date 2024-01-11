@@ -1,11 +1,10 @@
 from django.urls import path
-# from rest_framework import routers
 from django.contrib import admin
 
-from useful_habits.views.habit import *
-# from useful_habits.views.course import *
-# from useful_habits.views.payment import PaymentListView, PaymentRetrieveView, PaymentUpdateView, PaymentCreateView, \
-#     PaymentDestroyView
+from useful_habits.views.habit import (HabitListView, PublicHabitListView,
+                                       HabitRetrieveView,
+                                       HabitUpdateView,
+                                       HabitCreateView, HabitDestroyView)
 
 
 urlpatterns = [
@@ -16,8 +15,5 @@ urlpatterns = [
     path('update/<int:pk>/', HabitUpdateView.as_view(), name='habit_update'),
     path('create/', HabitCreateView.as_view(), name='habit_create'),
     path('delete/<int:pk>/', HabitDestroyView.as_view(), name='habit_delete'),
-   ]
+]
 
-# router = routers.SimpleRouter()
-# router.register('course', CourseViewSet)
-# urlpatterns += router.urls
