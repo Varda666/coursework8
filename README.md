@@ -1,16 +1,14 @@
 1. Название продукта
-coursework7
+coursework8
 2. Краткое описание
-SPA веб-приложение Трекер полезных привычек.
+SPA веб-приложение Трекер полезных привычек c Docker Compose.
 3. Необходимые условия для использования продукта:
 - программа запускается на версии Python 3.11,
 - необходимые к установке пакеты указаны в requirements.txt,
-- клонировать репозиторий: git clone https://github.com/Varda666/coursework7
+- клонировать репозиторий: git clone https://github.com/Varda666/coursework8
 - наполнить .env на основе .env.sample, 
-- создать вирт. окружение: python -m venv <название_окружения>, 
-- активировать вирт. окружение: Windows: myenv\Scripts\activate, 
-- применить миграции: python manage.py makemigrations, затем python manage.py migrate 
-- запустить проект: python manage.py runserver.
+- cобрать образ с помощью команды docker-compose build
+- запустите контейнеры с помощью команды docker-compose up
 4. Как принять участие в проекте
 Шаги, которые должен пройти потенциальный контрибьютор. 
 6. Добавьте список контрибьюторов

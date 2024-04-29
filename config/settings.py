@@ -95,11 +95,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        "PASSWORD": os.getenv('DB_PASSWORD'),
-        "HOST": os.getenv('DB_HOST'),
-        "PORT": os.getenv('DB_PORT')
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
+        "HOST": os.getenv('POSTGRES_HOST'),
+        "PORT": os.getenv('POSTGRES_PORT')
     }
 }
 
@@ -161,7 +161,10 @@ CACHE_ENABLED = os.getenv('CACHE_ENABLED') == "True"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv('CACHE_LOCATION'),
+        "LOCATION": os.getenv('REDIS_LOCATION'),
+        "REDIS_PASSWORD": os.getenv('REDIS_PASSWORD'),
+        "REDIS_PORT": os.getenv('REDIS_PORT'),
+        "REDIS_DATABASES": os.getenv('REDIS_DATABASES'),
     }
 }
 
@@ -179,10 +182,10 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 
 # URL-адрес брокера сообщений
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 
 # URL-адрес брокера результатов, также Redis
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
 # Часовой пояс для работы Celery
 CELERY_TIMEZONE = "Europe/Moscow"
