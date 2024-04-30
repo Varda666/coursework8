@@ -35,7 +35,6 @@ services:
     command: celery -A config worker -l INFO
     tty: true
     depends_on:
-      - app
       - redis
 
   celery_beat:
@@ -43,5 +42,4 @@ services:
     command: celery -A config beat -l INFO -S django
     tty: true
     depends_on:
-      - app
       - redis
